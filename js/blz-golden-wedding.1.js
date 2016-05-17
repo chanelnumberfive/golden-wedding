@@ -17,10 +17,6 @@
 		204, 213, 215, 219,
 		220, 221, 222, 223, 224, 225, 226, 227, 228, 230, 231, 232, 233, 235, 236, 237, 238, 239
 	];
-	//对已经标有blz-data-goldenwedding的dom元素进行金婚动画初始化;
-	$target.each(function(){
-		initmodule.call($(this),null,null);
-	});
 	//金婚动画构造函数
 	function GoldenWedding(font,a2){
 		this.font=font||a;
@@ -118,4 +114,6 @@
 		});
 		return this;
     };
+	//对已经标有blz-data-goldenwedding的dom元素进行金婚动画初始化;
+	$target.initGoldWedding(null,null,[]);
 }(window.Zepto || window.jQuery);
