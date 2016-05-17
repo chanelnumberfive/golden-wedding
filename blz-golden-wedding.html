@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" content="user-scalable=no">
+<link rel="stylesheet" href="css/blz-golden-wedding.css">
+</head>
+
+<body>
+<div class="blz-photo" data-blz-index="0">
+    <div class="blz-photo-wisher">
+    </div>
+    <ul class="blz-photo-wall box clear"></ul>
+</div>
+</body>
+<script src="js/zepto.js"></script>
+<script src="js/blz-golden-wedding.1.js"></script>
+<script>
++function($){
+	var data=[
+		{
+			name:'范冰冰',
+			url:'images/1.jpg',
+		},
+		{
+			name:'章子怡',
+			url:'images/2.jpg',
+		},
+		{
+			name:'李小龙',
+			url:'images/3.jpg',
+		},
+		{
+			name:'成龙',
+			url:'images/4.jpg',
+		},
+		{
+			name:'范子琪',
+			url:'images/5.jpg',
+		}
+	];
+	//首次加载初始化金婚模块数据
+	$('.blz-photo-wall').initGoldWedding(null,null,data);
+	
+	//页面加载后有新的订单后使用如下方式触发金婚动画
+    $('.blz-photo-wall').insertImage(data[0]);
+	$('.blz-photo-wall').insertImage(data[1]);
+	$('.blz-photo-wall').insertImage(data[2]);
+	$('.blz-photo-wall').insertImage(data[3]);
+	$('.blz-photo-wall').insertImage(data[4]);
+}(window.Zepto||window.jQuery);
+</script>
+</html>
