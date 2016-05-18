@@ -8,47 +8,50 @@
 </head>
 
 <body>
-<div class="blz-photo" data-blz-index="0">
+<div class="blz-photo">
     <div class="blz-photo-wisher">
     </div>
-    <ul class="blz-photo-wall box clear"></ul>
+    <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="0"></ul>
+</div>
+<div class="blz-photo">
+    <div class="blz-photo-wisher">
+    </div>
+    <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="1"></ul>
 </div>
 </body>
 <script src="js/zepto.js"></script>
 <script src="js/blz-golden-wedding.1.js"></script>
 <script>
+//将从后台传来的数据传入$('.blz-photo-wall').insertTmage函数即可；
+//示例
 +function($){
-	var data=[
-		{
-			name:'范冰冰',
-			url:'images/1.jpg',
-		},
-		{
-			name:'章子怡',
-			url:'images/2.jpg',
-		},
-		{
-			name:'李小龙',
-			url:'images/3.jpg',
-		},
-		{
-			name:'成龙',
-			url:'images/4.jpg',
-		},
-		{
-			name:'范子琪',
-			url:'images/5.jpg',
-		}
-	];
-	//首次加载初始化金婚模块数据
-	$('.blz-photo-wall').initGoldWedding(null,null,data);
+	var tip={
+		tip:0,
+		$target:$('.blz-photo-wall')
+	};
+	//$('.blz-photo-wall').initGoldWedding(null,null,[]);//金婚动画初始化已经都买的数据
 	
-	//页面加载后有新的订单后使用如下方式触发金婚动画
-    $('.blz-photo-wall').insertImage(data[0]);
-	$('.blz-photo-wall').insertImage(data[1]);
-	$('.blz-photo-wall').insertImage(data[2]);
-	$('.blz-photo-wall').insertImage(data[3]);
-	$('.blz-photo-wall').insertImage(data[4]);
-}(window.Zepto||window.jQuery);
+	//每间隔一秒从服务器获取数据
+	function getData(){
+		$.ajax({
+			url:'json/data.json',
+			data:{
+				max:tip.tip
+			},
+			success:function(data){
+				for(var i=data.length-1;i>=0;i--){
+					tip.tip=tip.tip>=data[i].index?tip.tip:data[i].index;
+					tip.$target.insertImage(data[i]);
+					document.title=tip.tip;
+				}
+			},
+			error:function(){
+				throw new Error('请求失败');
+			}
+		});
+	}
+	getData();
+	setInterval(getData,25000);
+}(window.Zepto || window.jQuery);
 </script>
 </html>

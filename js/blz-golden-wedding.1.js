@@ -81,8 +81,9 @@
 	};
 	/*插入图片函数*/
     $.fn.insertImage=function(data) {
-		this.each(function(index,elem){
+		return this.each(function(inde,elem){
 			var _this=$(elem);
+			var index=_this.data('index');
 			var img = new Image();
 			var data1=_this.data('blz-goldenwedding');
 			var a1=data1.copyFont;
@@ -90,7 +91,7 @@
 			if(a1.length===0){return false;}//当金婚二字被填满时暂且退出动画！
 			if($BPW.eq(index).is('.preparing')){//当动画正在执行的时候，如果再次执行动画，则会将传入的数据缓存到该dom元素的data-goldenwedding中
 				data1.cachingData.push(data);
-				return false;
+				return true;
 			}
 			$BPW.eq(index).addClass('preparing');
 			img.src = data.url;
@@ -112,7 +113,6 @@
 				}, 5000);
 			};
 		});
-		return this;
     };
 	//对已经标有blz-data-goldenwedding的dom元素进行金婚动画初始化;
 	$target.initGoldWedding(null,null,[]);
