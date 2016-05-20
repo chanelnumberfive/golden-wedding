@@ -1,8 +1,10 @@
 //金婚动画
-+function () {
++function ($) {
     'use strict';
 	var $target=$('[data-blz-goldenwedding]');
     var $BPW = $('.blz-photo-wisher');
+	var $alert=$('.blz-bk');
+	var $SYA=$('.blz-see-you-again');
     var a = [
 		2, 3, 4, 5, 6, 11, 13, 15, 16, 17, 18, 19,
 		21, 22, 26, 27, 31, 33, 35, 38,
@@ -47,13 +49,13 @@
 		$elem.data('blz-goldenwedding',customData).html(customData.html);
 		customData.html=$elem.find('li');
 	}
-    /*制作随机数*/
-    function makeRandom(n) { /*参数n为随机数的上限*/
+    //制作随机数
+    function makeRandom(n) { //参数n为随机数的上限
         return Math.floor(Math.random() * n);
     }
 
-    /*数组自减*/
-    function arrayDecrement(a, index) { /*a为目标数组，index为要删除的数组值得索引*/
+    //数组自减
+    function arrayDecrement(a, index) { //a为目标数组，index为要删除的数组值得索引
         return a.splice(index, 1);
     }
 	
@@ -69,6 +71,11 @@
 		arrayDecrement(a1, aRandom);
 	}
 	
+	//图片点击效果
+	function seeYouAgain(img,$target){
+	    $target.html('<img src="' + img.src + '"><p>' + img.title + '</p><span>刚刚为Ta们购买</span>');
+		$alert.fadeIn(300);
+	}
 	//初始化金婚动画模块
 	$.fn.initGoldWedding=function(fontApperance,matrix,data){//参数三为在页面加载之前就已经存在的动画数据
 		this.each(function(index,elem){
@@ -79,12 +86,13 @@
 		});
 		return this;
 	};
-	/*插入图片函数*/
-    $.fn.insertImage=function(data) {
+	//插入图片函数
+    $.fn.insertImage=function(data,callback) {
 		return this.each(function(inde,elem){
 			var _this=$(elem);
 			var index=_this.data('index');
 			var img = new Image();
+			var div=document.createElement('div');
 			var data1=_this.data('blz-goldenwedding');
 			var a1=data1.copyFont;
 			var $lis=data1.html;
@@ -95,25 +103,33 @@
 			}
 			$BPW.eq(index).addClass('preparing');
 			img.src = data.url;
+			img.title=data.name;
+			$(img).attr('data-blz-img','1');
 			img.onload = function () {
 				var aRandom = makeRandom(a1.length);
-				$lis.eq(a1[aRandom]).html('<div><img src="' + this.src + '"></div>');
-				$BPW.eq(index).html('<img src="' + this.src + '"><p>' + data.name + '</p><span>刚刚为Ta们购买</span>');
+				div.appendChild(this);
+				$lis.eq(a1[aRandom]).append(div);
+				$BPW.eq(index).html('<img src="' + this.src + '"><p>' + this.title + '</p><span>刚刚为Ta们购买</span>');
 				setTimeout(function () {
 					$lis.eq(a1[aRandom]).find('div').fadeIn(1000);
 					$BPW.eq(index).addClass('animate');
 					arrayDecrement(a1, aRandom);
+					if(callback){callback();}
 				}, 100);
 				setTimeout(function () {
 					$BPW.eq(index).removeClass('animate preparing');
 					if(data1.cachingData.length!==0){
-						_this.insertImage(data1.cachingData[0]);
+						_this.insertImage(data1.cachingData[0],callback);
 						data1.cachingData.shift();
 					}
 				}, 5000);
 			};
 		});
     };
+	$(document).on('tap.blz.alert click.blz.alert','[data-blz-img="1"]',function(event){
+		var $elem=$(event.target);
+		seeYouAgain(event.target,$SYA);
+	});
 	//对已经标有blz-data-goldenwedding的dom元素进行金婚动画初始化;
 	$target.initGoldWedding(null,null,[]);
 }(window.Zepto || window.jQuery);
