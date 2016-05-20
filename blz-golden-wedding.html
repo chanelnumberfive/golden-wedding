@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
-<meta name="viewport" content="user-scalable=no">
 <link rel="stylesheet" href="css/blz-golden-wedding.css">
 </head>
 
@@ -18,10 +17,24 @@
     </div>
     <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="1"></ul>
 </div>
+<div class="blz-bk">
+    <!--<span data-blz-dismiss=".blz-bk" class="blz-close">×</span>-->
+    <div class="blz-see-you-again">
+    </div>
+</div>
 </body>
 <script src="js/zepto.js"></script>
 <script src="js/blz-golden-wedding.1.js"></script>
 <script>
+//关闭功能插件
++function($){
+	function closeWindow($target){
+	    $target.fadeOut();   
+	}
+	$(document).on('tap.blz.close click.blz.close','.blz-bk',function(){
+		closeWindow($(this));
+	});
+}(window.Zepto || window.jQuery);
 //将从后台传来的数据传入$('.blz-photo-wall').insertTmage函数即可；
 //示例
 +function($){

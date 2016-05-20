@@ -3,7 +3,7 @@
 html {
 	height:100%;
 	font-size:-webkit-calc(2000vw / 640);
-	font-size:calc(3000vw /640);
+	font-size:calc(3000vw / 640);
 }
 body {
 	height:100%;
@@ -29,7 +29,24 @@ body {
     display: table;
     height: 0;
 }
-
+.blz-close {
+	padding:0.5rem;
+	float:right;
+	color:#fff;
+	font-size:1rem;
+	}
+.blz-bk {
+	display:none;
+	position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,1);
+	z-index:99999999;
+}
 .blz-photo {
     position: relative;
 	top:50%;
@@ -37,6 +54,7 @@ body {
 	transform:translateY(-50%);
 }
 
+.blz-see-you-again,
 .blz-photo-wisher {
     position: absolute;
     width: 4.2rem;
@@ -50,13 +68,17 @@ body {
     background-color: rgba(10, 10, 10, 0.5);
     z-index: 1000;
 }
-
+.blz-see-you-again {
+   -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
+}
+.blz-see-you-again p,
 .blz-photo-wisher p {
     margin:0;
 	line-height:1.4;
     text-align: center;
 }
-
+.blz-see-you-again span,
 .blz-photo-wisher span {
     position: absolute;
     top: 0.4rem;
@@ -65,7 +87,7 @@ body {
     font-size: 0.4rem;
     background-color: rgba(10, 10, 10, 0.6);
 }
-
+.blz-see-you-again img,
 .blz-photo-wisher img {
     display:block;
 	width: 4.2rem;
