@@ -136,6 +136,10 @@ li {list-style:none;}
     z-index: 10;
 	transform: translate(-50%,-50%) scale(0.2,0.2);
 	transform-origin:center center;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;/*动画引起页面闪烁修正*/
+	backface-visibility: hidden;/*动画引起页面闪烁修正*/
 }
 .blz-photo-wall li:hover {
 	overflow:visible;

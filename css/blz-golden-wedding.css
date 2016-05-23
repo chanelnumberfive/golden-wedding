@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+/*动画闪烁bug修正*/
 html {
 	height:100%;
 	font-size:-webkit-calc(2000vw / 640);
@@ -67,6 +68,10 @@ body {
     color: #fff;
     background-color: rgba(10, 10, 10, 0.5);
     z-index: 1000;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;/*动画引起页面闪烁修正*/
+	backface-visibility: hidden;/*动画引起页面闪烁修正*/
 }
 .blz-see-you-again {
    -webkit-transform: translate(-50%, -50%);
