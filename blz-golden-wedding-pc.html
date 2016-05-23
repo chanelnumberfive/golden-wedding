@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" href="css/blz-golden-wedding-pc.css">
+</head>
+
+<body>
+<div class="blz-photo">
+    <div class="blz-photo-wisher">
+    </div>
+    <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="0"></ul>
+</div>
+<div class="blz-photo">
+    <div class="blz-photo-wisher">
+    </div>
+    <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="1"></ul>
+</div>
+<div class="blz-bk">
+    <!--<span data-blz-dismiss=".blz-bk" class="blz-close">×</span>-->
+    <div class="blz-see-you-again">
+    </div>
+</div>
+</body>
+<script src="js/zepto.js"></script>
+<script src="js/blz-golden-wedding-pc.1.js"></script>
+<script>
+//关闭功能插件
++function($){
+	function closeWindow($target){
+	    $target.fadeOut();   
+	}
+	$(document).on('tap.blz.close click.blz.close','.blz-bk',function(){
+		closeWindow($(this));
+	});
+}(window.Zepto || window.jQuery);
+//将从后台传来的数据传入$('.blz-photo-wall').insertTmage函数即可；
+//示例
++function($){
+	var tip={
+		tip:0,
+		$target:$('.blz-photo-wall')
+	};
+	//$('.blz-photo-wall').initGoldWedding(null,null,[]);//金婚动画初始化已经都买的数据
+	
+	//每间隔一秒从服务器获取数据
+	function getData(){
+		$.ajax({
+			url:'json/data.json',
+			data:{
+				max:tip.tip
+			},
+			success:function(data){
+				for(var i=data.length-1;i>=0;i--){
+					tip.tip=tip.tip>=data[i].index?tip.tip:data[i].index;
+					tip.$target.insertImage(data[i]);
+					document.title=tip.tip;
+				}
+			},
+			error:function(){
+				throw new Error('请求失败');
+			}
+		});
+	}
+	getData();
+	setInterval(getData,25000);
+}(window.Zepto || window.jQuery);
+</script>
+</html>
