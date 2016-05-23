@@ -102,7 +102,6 @@
 				return true;
 			}
 			$BPW.eq(index).addClass('preparing');
-			img.src = data.url;
 			img.title=data.name;
 			$(img).attr('data-blz-img','1');
 			img.onload = function () {
@@ -124,10 +123,10 @@
 					}
 				}, 5000);
 			};
+			img.src = data.url;//请务必将img的赋值语句放在img.onload img.onerror之后
 		});
     };
 	$(document).on('tap.blz.alert click.blz.alert','[data-blz-img="1"]',function(event){
-		var $elem=$(event.target);
 		seeYouAgain(event.target,$SYA);
 	});
 	//对已经标有blz-data-goldenwedding的dom元素进行金婚动画初始化;
