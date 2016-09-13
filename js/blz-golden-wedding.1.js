@@ -73,7 +73,7 @@
 	
 	//图片点击效果
 	function seeYouAgain(img,$target){
-	    $target.html('<img src="' + img.src + '"><p>' + img.title + '</p><span>刚刚为Ta们购买</span>');
+	    $target.html('<img src="' + img.src + '"><p>' + img.title + '</p><span>陶紫同学祝你中秋节快乐</span>');
 		$alert.fadeIn(300);
 	}
 	//初始化金婚动画模块
@@ -108,7 +108,7 @@
 				var aRandom = makeRandom(a1.length);
 				div.appendChild(this);
 				$lis.eq(a1[aRandom]).append(div);
-				$BPW.eq(index).html('<img src="' + this.src + '"><p>' + this.title + '</p><span>刚刚为Ta们购买</span>');
+				$BPW.eq(index).html('<img src="' + this.src + '"><p>' + this.title + '</p><span>陶紫同学祝你中秋节快乐</span>');
 				setTimeout(function () {
 					$lis.eq(a1[aRandom]).find('div').fadeIn(1000);
 					$BPW.eq(index).addClass('animate');

@@ -2,8 +2,17 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>无标题文档</title>
+<title>祝陶紫中秋节快乐</title>
 <link rel="stylesheet" href="css/blz-golden-wedding.css">
+<style>
+    body {
+        background:url(images/bk.jpg) no-repeat;
+        background-size:cover;
+    }
+    .blz-photo-wall li.active:after {
+        background-color:transparent;
+    }
+</style>
 </head>
 
 <body>
@@ -11,11 +20,6 @@
     <div class="blz-photo-wisher">
     </div>
     <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="0"></ul>
-</div>
-<div class="blz-photo">
-    <div class="blz-photo-wisher">
-    </div>
-    <ul class="blz-photo-wall box clear" data-blz-goldenwedding data-index="1"></ul>
 </div>
 <div class="blz-bk">
     <!--<span data-blz-dismiss=".blz-bk" class="blz-close">×</span>-->
@@ -55,7 +59,6 @@
 				for(var i=data.length-1;i>=0;i--){
 					tip.tip=tip.tip>=data[i].index?tip.tip:data[i].index;
 					tip.$target.insertImage(data[i]);
-					document.title=tip.tip;
 				}
 			},
 			error:function(){
